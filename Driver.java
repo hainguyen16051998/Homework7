@@ -45,7 +45,7 @@ public class Driver extends Person {
                 '}';
     }
 
-    public void nhapThongTin() {
+    public void inputInfo() {
         this.id = AUTO_ID;
         AUTO_ID++;
         super.inputInfo();

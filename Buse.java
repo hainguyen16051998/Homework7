@@ -1,13 +1,13 @@
 package Entity;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import java.util.Scanner;
 
 public class Buse implements Inputable {
     private static int AUTO_ID = 100;
     private int id;
-    private String distance;
+    private int code;
+    private int distance;
     private int stopNum;
 
     public static int getAutoId() {
@@ -26,11 +26,19 @@ public class Buse implements Inputable {
         this.id = id;
     }
 
-    public String getDistance() {
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(int distance) {
         this.distance = distance;
     }
 
@@ -46,7 +54,8 @@ public class Buse implements Inputable {
     public String toString() {
         return "Buse{" +
                 "id=" + id +
-                ", distance='" + distance + '\'' +
+                ", code=" + code +
+                ", distance=" + distance +
                 ", stopNum=" + stopNum +
                 '}';
     }
@@ -55,14 +64,36 @@ public class Buse implements Inputable {
     public void inputInfo() {
         this.id = AUTO_ID;
         AUTO_ID++;
-        System.out.print("Nhập mã tuyến");
-        this.id = new Scanner(System.in).nextInt();
-        System.out.print("Nhập khoảng cách");
-        this.distance = new Scanner(System.in).nextLine();
-        System.out.print("Nhập số điểm dừng");
-        this.stopNum = new Scanner(System.in).nextInt();
-
+        System.out.print("Nhập mã tuyến: ");
+        this.setCode(new Scanner(System.in).nextInt());
+        distancelogic();
+        stopNumlogic();
     }
 
 
+    public void distancelogic() {
+        System.out.print("Nhập khoảng cách: ");
+        int a = 0;
+        do {
+            a = new Scanner(System.in).nextInt();
+            if (a > 0) {
+                break;
+            }
+            System.out.print("Khoảng cách phải lớn hơn 0, mời nhập lại: ");
+        } while (true);
+        this.distance = a;
+    }
+
+    private void stopNumlogic() {
+        System.out.print("Nhập số điểm dừng: ");
+        int b = 0;
+        do {
+            b = new Scanner(System.in).nextInt();
+            if (b > 0) {
+                break;
+            }
+            System.out.print("Số điểm dừng phải lớn hơn 0, mời nhập lại: ");
+        } while (true);
+        this.stopNum = b;
+    }
 }
